@@ -8,46 +8,38 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
+  TabBarIOS,
   Text,
   View
 } from 'react-native';
 
+// import TabBar from './components/TabBar';
+
 export default class SmartNode extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        <TabBarIOS>
+        <TabBarIOS.Item
+            title = 'My Node'
+            icon = { require('./assets/img/ico_node.png') }
+            selected = { this.props.mainTab === 0 }
+            onPress = { () => this.setMainTab(0) }
+        >
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+            title = 'Preference'
+            icon = { require('./assets/img/ico_preference.png') }
+            selected = { this.props.mainTab === 1 }
+            onPress = { () => this.setMainTab(1) }
+        >
+        </TabBarIOS.Item>
+      </TabBarIOS>
     );
   }
 }
-
+console.log('hey');
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+
 });
 
 AppRegistry.registerComponent('SmartNode', () => SmartNode);
