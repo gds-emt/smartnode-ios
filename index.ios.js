@@ -4,42 +4,61 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import {
   AppRegistry,
-  StyleSheet,
+//  StyleSheet,
   TabBarIOS,
   Text,
-  View
 } from 'react-native';
 
 // import TabBar from './components/TabBar';
 
-export default class SmartNode extends Component {
+export default class SmartNode extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentTab: 'node',
+    };
+  }
+
   render() {
     return (
-        <TabBarIOS>
+      <TabBarIOS>
         <TabBarIOS.Item
-            title = 'My Node'
-            icon = { require('./assets/img/ico_node.png') }
-            selected = { this.props.mainTab === 0 }
-            onPress = { () => this.setMainTab(0) }
+          title="My Node"
+          icon={require('./assets/img/ico_node.png')}
+          selected={this.state.currentTab === 'node'}
+          onPress={() => {
+            this.setState({
+              currentTab: 'node',
+            });
+          }}
         >
+          <Text>My Node</Text>
         </TabBarIOS.Item>
         <TabBarIOS.Item
-            title = 'Preference'
-            icon = { require('./assets/img/ico_preference.png') }
-            selected = { this.props.mainTab === 1 }
-            onPress = { () => this.setMainTab(1) }
+          title="Preferences"
+          icon={require('./assets/img/ico_settings.png')}
+          selected={this.state.currentTab === 'preferences'}
+          onPress={() => {
+            this.setState({
+              currentTab: 'preferences',
+            });
+          }}
         >
+          <Text>Preferences</Text>
         </TabBarIOS.Item>
       </TabBarIOS>
     );
   }
 }
-console.log('hey');
+
+/*
 const styles = StyleSheet.create({
 
 });
+*/
 
 AppRegistry.registerComponent('SmartNode', () => SmartNode);
