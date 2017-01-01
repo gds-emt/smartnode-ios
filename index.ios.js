@@ -12,7 +12,7 @@ import {
   Text,
 } from 'react-native';
 
-// import TabBar from './components/TabBar';
+import MyNode from './components/MyNode';
 
 export default class SmartNode extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ export default class SmartNode extends React.Component {
             });
           }}
         >
-          <Text>My Node</Text>
+          <MyNode />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="Preferences"
