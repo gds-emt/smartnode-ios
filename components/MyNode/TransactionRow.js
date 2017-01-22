@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   StyleSheet,
   Text,
   View,
@@ -15,14 +16,26 @@ const styles = StyleSheet.create({
   },
   viewAvatar: {
     flex: 1,
-    backgroundColor: 'green',
   },
   viewDetails: {
     flex: 4.5,
-    backgroundColor: 'blue',
+    paddingHorizontal: 10,
   },
   viewEth: {
     flex: 1.5,
+  },
+  txtTitle: {
+    fontSize: 16,
+  },
+  txtTime: {
+    fontSize: 12,
+    paddingTop: 2,
+    color: '#666',
+  },
+  txtDescription: {
+    fontSize: 12,
+    color: '#999',
+    paddingTop: 2,
   },
   txtValuePositive: {
     textAlign: 'right',
@@ -32,21 +45,45 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: '#FD677C',
   },
+  imgIcon: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    borderColor: '#ccc',
+    borderWidth: 1,
+  },
 });
 
 export default function TransactionRow(props) {
-  let txtValue = <Text style={styles.txtValuePositive}>Ξ {ethUtils.fromWei(props.transaction.value).toLocaleString()}</Text>;
-  if (Number(props.transaction.value) < 0) {
-    txtValue = <Text style={styles.txtValueNegative}>Ξ {(ethUtils.fromWei(props.transaction.value) * -1).toFixed(3).toLocaleString()}</Text>;
+  const tx = props.transaction;
+
+  let txtValue = <Text style={styles.txtValuePositive}>Ξ {ethUtils.fromWei(tx.value).toLocaleString()}</Text>;
+  if (Number(tx.value) < 0) {
+    txtValue = <Text style={styles.txtValueNegative}>Ξ {(ethUtils.fromWei(tx.value) * -1).toFixed(3).toLocaleString()}</Text>;
+  }
+
+  let icon = 'https://pbs.twimg.com/profile_images/626149701189042177/LWpxKEv3.png';
+  let title = 'Receive';
+  let description = tx.address;
+  if (tx.type === 'service' && tx.service.icon) {
+    icon = tx.service.icon;
+    title = tx.service.name;
+    description = tx.service.description;
+  } else {
+    if (tx.type === 'send') {
+      title = 'Send';
+    }
   }
 
   return (
     <View style={styles.viewRow}>
       <View style={styles.viewAvatar}>
-        <Text>{props.transaction.type}</Text>
+        <Image style={styles.imgIcon} source={{ uri: icon }} />
       </View>
       <View style={styles.viewDetails}>
-        <Text>{props.transaction.address}</Text>
+        <Text style={styles.txtTitle}>{title}</Text>
+        <Text style={styles.txtTime}>{tx.time}</Text>
+        <Text style={styles.txtDescription}>{description}</Text>
       </View>
       <View style={styles.viewEth}>
         {txtValue}

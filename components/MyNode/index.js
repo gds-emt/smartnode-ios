@@ -74,7 +74,7 @@ export default class MyNode extends React.Component {
     this.state = {
       balance: '',
       latestBlock: '',
-      ethsgd: 10.35,
+      ethsgd: 10.00,
       transactions: {},
     };
 
@@ -87,7 +87,9 @@ export default class MyNode extends React.Component {
 
   componentDidMount() {
     this.getStatus();
+    this.getRate();
     setInterval(this.getStatus, 15 * 1000);
+    setInterval(this.getRate, 15 * 60 * 1000);
   }
 
   getStatus() {
@@ -106,6 +108,14 @@ export default class MyNode extends React.Component {
       if (newState) {
         this.setState(newState);
       }
+    });
+  }
+
+  getRate() {
+    client.getRate().then((response) => {
+      this.setState({
+        ethsgd: response,
+      });
     });
   }
 
