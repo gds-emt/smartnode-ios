@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ListView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -12,27 +11,32 @@ import TransactionRow from './TransactionRow';
 const styles = StyleSheet.create({
   viewContainer: {
     flex: 1.6,
-    backgroundColor: '#ccc',
+    backgroundColor: 'white',
   },
 
   txtScrollTitle: {
     fontSize: 12,
-    paddingVertical: 5,
+    paddingVertical: 8,
     paddingHorizontal: 5,
-    color: '#666',
-  }
+    color: '#444',
+    backgroundColor: '#ccc',
+  },
 });
 
 export default class Transactions extends React.Component {
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      transactions: ds.cloneWithRows([
-        { merchant: 'honestbee', time: '2 hours ago', description: '100 Nespresso capsules', eth: '-8.180' },
-        { merchant: 'Coinbase', time: '11 hours ago', description: 'Top up', eth: '100.000' },
-      ]),
+      dsTransactions: this.ds.cloneWithRows([]),
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      dsTransactions: this.ds.cloneWithRows(nextProps.transactions),
+    });
   }
 
   render() {
@@ -40,8 +44,9 @@ export default class Transactions extends React.Component {
       <View style={styles.viewContainer}>
         <Text style={styles.txtScrollTitle}>LATEST TRANSACTIONS</Text>
         <ListView
-          dataSource={this.state.transactions}
-          renderRow={(transaction) => <TransactionRow transaction={transaction} />}
+          dataSource={this.state.dsTransactions}
+          enableEmptySections
+          renderRow={transaction => <TransactionRow transaction={transaction} />}
         />
       </View>
     );

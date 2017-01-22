@@ -70,10 +70,16 @@ const styles = StyleSheet.create({
 export default class MyNode extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       balance: '',
       latestBlock: '',
       ethsgd: 10.35,
+      transactions: {},
+    };
+
+    this.jsonObjs = {
+      transactions: '{}',
     };
 
     this.getStatus = this.getStatus.bind(this);
@@ -92,6 +98,10 @@ export default class MyNode extends React.Component {
       }
       if (this.state.balance !== response.wallet.balance) {
         newState.balance = response.wallet.balance;
+      }
+      if (this.jsonObjs.transactions !== JSON.stringify(response.transactions)) {
+        this.jsonObjs.transactions = JSON.stringify(response.transactions);
+        newState.transactions = response.transactions;
       }
       if (newState) {
         this.setState(newState);
@@ -129,7 +139,7 @@ export default class MyNode extends React.Component {
             </View>
           </View>
         </View>
-        <Transactions />
+        <Transactions transactions={this.state.transactions} />
       </View>
     );
   }
