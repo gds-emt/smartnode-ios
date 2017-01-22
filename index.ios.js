@@ -3,10 +3,11 @@ import {
   AppRegistry,
 //  StyleSheet,
   TabBarIOS,
-  Text,
+//  Text,
 } from 'react-native';
 
 import MyNode from './components/MyNode';
+import Preferences from './components/Preferences';
 
 export default class SmartNode extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ export default class SmartNode extends React.Component {
             });
           }}
         >
-          <Text>Preferences</Text>
+          <Preferences />
         </TabBarIOS.Item>
       </TabBarIOS>
     );
