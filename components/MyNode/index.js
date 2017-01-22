@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 
 import Transactions from './Transactions';
-import client from './../api-client';
+import client from './../../lib/api-client';
+import ethUtils from './../../lib/eth-utils';
 
 const styles = StyleSheet.create({
   viewUpper: {
@@ -43,13 +44,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FEC40A',
   },
+  txtRate: {
+    textAlign: 'center',
+    fontSize: 11,
+    color: '#FEF0BE',
+  },
   txtStatus: {
     fontSize: 11,
     color: '#fff',
   },
   txtOnline: {
     fontSize: 11,
-    color: '#fff',
+    color: '#AAE8AC',
     textAlign: 'left',
     paddingHorizontal: 5,
   },
@@ -67,6 +73,7 @@ export default class MyNode extends React.Component {
     this.state = {
       balance: '',
       latestBlock: '',
+      ethsgd: 10.35,
     };
 
     this.getStatus = this.getStatus.bind(this);
@@ -74,15 +81,20 @@ export default class MyNode extends React.Component {
 
   componentDidMount() {
     this.getStatus();
-    setInterval(this.getStatus, 2000);
+    setInterval(this.getStatus, 15 * 1000);
   }
 
   getStatus() {
     client.getStatus().then((response) => {
-      if (this.state !== response.blockNumber) {
-        this.setState({
-          latestBlock: response.blockNumber,
-        });
+      const newState = {};
+      if (this.state.blockNumber !== response.blockNumber) {
+        newState.latestBlock = response.blockNumber;
+      }
+      if (this.state.balance !== response.wallet.balance) {
+        newState.balance = response.wallet.balance;
+      }
+      if (newState) {
+        this.setState(newState);
       }
     });
   }
@@ -95,16 +107,22 @@ export default class MyNode extends React.Component {
           <View style={styles.viewBalance}>
             <Text style={styles.txtBalance}>BALANCE</Text>
             <Text style={styles.txtEthBalance}>
-              <Text style={styles.txtSymbol}>Ξ</Text> {this.state.balance}
+              <Text style={styles.txtSymbol}>Ξ</Text> {ethUtils.fromWei(this.state.balance).toLocaleString()}
             </Text>
             <Text style={styles.txtSgdBalance}>
-              S$ 202.23
+              S$ {(ethUtils.fromWei(this.state.balance) * this.state.ethsgd).toFixed(2)}
             </Text>
+
           </View>
 
           <View style={styles.viewStatusLine}>
             <View style={styles.viewStatusLineCell}>
               <Text style={styles.txtOnline}>Online</Text>
+            </View>
+            <View style={styles.viewStatusLineCell}>
+              <Text style={styles.txtRate}>
+                ETHSGD @ {this.state.ethsgd}
+              </Text>
             </View>
             <View style={styles.viewStatusLineCell}>
               <Text style={styles.txtBlock}>Latest block: {this.state.latestBlock.toLocaleString()}</Text>
