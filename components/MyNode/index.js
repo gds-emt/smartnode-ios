@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import Transactions from './Transactions';
+import client from './../api-client';
 
 const styles = StyleSheet.create({
   viewUpper: {
@@ -27,7 +28,6 @@ const styles = StyleSheet.create({
   viewStatusLineCell: {
     flex: 1,
   },
-
   txtBalance: {
     paddingTop: 20,
     color: '#aaa',
@@ -62,6 +62,31 @@ const styles = StyleSheet.create({
 });
 
 export default class MyNode extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      balance: '',
+      latestBlock: '',
+    };
+
+    this.getStatus = this.getStatus.bind(this);
+  }
+
+  componentDidMount() {
+    this.getStatus();
+    setInterval(this.getStatus, 2000);
+  }
+
+  getStatus() {
+    client.getStatus().then((response) => {
+      if (this.state !== response.blockNumber) {
+        this.setState({
+          latestBlock: response.blockNumber,
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -70,7 +95,7 @@ export default class MyNode extends React.Component {
           <View style={styles.viewBalance}>
             <Text style={styles.txtBalance}>BALANCE</Text>
             <Text style={styles.txtEthBalance}>
-              <Text style={styles.txtSymbol}>Ξ</Text> 122.751
+              <Text style={styles.txtSymbol}>Ξ</Text> {this.state.balance}
             </Text>
             <Text style={styles.txtSgdBalance}>
               S$ 202.23
@@ -82,7 +107,7 @@ export default class MyNode extends React.Component {
               <Text style={styles.txtOnline}>Online</Text>
             </View>
             <View style={styles.viewStatusLineCell}>
-              <Text style={styles.txtBlock}>Latest block: 1,9451456</Text>
+              <Text style={styles.txtBlock}>Latest block: {this.state.latestBlock.toLocaleString()}</Text>
             </View>
           </View>
         </View>
