@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import {
   Image,
@@ -63,16 +64,22 @@ export default function TransactionRow(props) {
   }
 
   let icon = 'https://pbs.twimg.com/profile_images/626149701189042177/LWpxKEv3.png';
-  let title = 'Receive';
+  let title = '';
   let description = tx.address;
   if (tx.type === 'service' && tx.service.icon) {
     icon = tx.service.icon;
     title = tx.service.name;
     description = tx.service.description;
   } else {
+    title = 'Receive';
     if (tx.type === 'send') {
       title = 'Send';
     }
+  }
+
+  let time = moment(tx.time).fromNow();
+  if (moment(tx.time).isAfter(moment().subtract(1, 'hour'))) {
+    time = 'Just now';
   }
 
   return (
@@ -82,7 +89,7 @@ export default function TransactionRow(props) {
       </View>
       <View style={styles.viewDetails}>
         <Text style={styles.txtTitle}>{title}</Text>
-        <Text style={styles.txtTime}>{tx.time}</Text>
+        <Text style={styles.txtTime}>{time}</Text>
         <Text style={styles.txtDescription}>{description}</Text>
       </View>
       <View style={styles.viewEth}>
