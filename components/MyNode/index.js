@@ -120,6 +120,7 @@ export default class MyNode extends React.Component {
   }
 
   render() {
+    StatusBar.setBarStyle('light-content');
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />

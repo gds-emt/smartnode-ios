@@ -45,10 +45,11 @@ export default class MyNode extends React.Component {
 
 
   render() {
+    StatusBar.setBarStyle('dark-content');
     const qrURI = `https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=${this.state.address}&chld=L|1&choe=UTF-8`;
+
     return (
       <View style={styles.viewPreferences}>
-        <StatusBar barStyle="dark-content" />
         <Text>Wallet address</Text>
         <Text>{this.state.address}</Text>
         <Image style={styles.imgQR} source={{ uri: qrURI }} />
