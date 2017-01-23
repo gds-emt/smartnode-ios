@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     color: '#FEC40A',
   },
   txtRate: {
-    textAlign: 'center',
+    textAlign: 'left',
+    paddingHorizontal: 5,
     fontSize: 11,
     color: '#FEF0BE',
   },
@@ -137,9 +138,6 @@ export default class MyNode extends React.Component {
           </View>
 
           <View style={styles.viewStatusLine}>
-            <View style={styles.viewStatusLineCell}>
-              <Text style={styles.txtOnline}>Online</Text>
-            </View>
             <View style={styles.viewStatusLineCell}>
               <Text style={styles.txtRate}>
                 ETHSGD @ {this.state.ethsgd}
