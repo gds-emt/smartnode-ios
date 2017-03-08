@@ -8,7 +8,7 @@ import {
 
 import Transactions from './Transactions';
 import client from './../../lib/api-client';
-import ethUtils from './../../lib/eth-utils';
+import utils from './../../lib/utils';
 
 const styles = StyleSheet.create({
   viewUpper: {
@@ -47,21 +47,21 @@ const styles = StyleSheet.create({
   txtRate: {
     textAlign: 'left',
     paddingHorizontal: 5,
-    fontSize: 11,
+    fontSize: 13,
     color: '#FEF0BE',
   },
   txtStatus: {
-    fontSize: 11,
+    fontSize: 13,
     color: '#fff',
   },
   txtOnline: {
-    fontSize: 11,
+    fontSize: 13,
     color: '#AAE8AC',
     textAlign: 'left',
     paddingHorizontal: 5,
   },
   txtBlock: {
-    fontSize: 11,
+    fontSize: 13,
     color: '#fff',
     textAlign: 'right',
     paddingHorizontal: 5,
@@ -129,10 +129,10 @@ export default class MyNode extends React.Component {
           <View style={styles.viewBalance}>
             <Text style={styles.txtBalance}>BALANCE</Text>
             <Text style={styles.txtEthBalance}>
-              <Text style={styles.txtSymbol}>Ξ</Text> {ethUtils.fromWei(this.state.balance).toLocaleString()}
+              <Text style={styles.txtSymbol}>Ξ</Text> {utils.fromWei(this.state.balance).toLocaleString()}
             </Text>
             <Text style={styles.txtSgdBalance}>
-              S$ {(ethUtils.fromWei(this.state.balance) * this.state.ethsgd).toFixed(2)}
+              S$ {(utils.fromWei(this.state.balance) * this.state.ethsgd).toLocaleString()}
             </Text>
 
           </View>

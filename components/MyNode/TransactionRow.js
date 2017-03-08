@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import ethUtils from './../../lib/eth-utils';
+import utils from './../../lib/utils';
 
 const styles = StyleSheet.create({
   viewRow: {
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   txtTime: {
-    fontSize: 12,
+    fontSize: 14,
     paddingTop: 2,
     color: '#666',
   },
@@ -58,22 +58,24 @@ const styles = StyleSheet.create({
 export default function TransactionRow(props) {
   const tx = props.transaction;
 
-  let txtValue = <Text style={styles.txtValuePositive}>Ξ {ethUtils.fromWei(tx.value).toLocaleString()}</Text>;
+  let txtValue = <Text style={styles.txtValuePositive}>Ξ {utils.fromWei(tx.value).toLocaleString()}</Text>;
   if (Number(tx.value) < 0) {
-    txtValue = <Text style={styles.txtValueNegative}>Ξ {(ethUtils.fromWei(tx.value) * -1).toFixed(3).toLocaleString()}</Text>;
+    txtValue = <Text style={styles.txtValueNegative}>Ξ {(utils.fromWei(tx.value) * -1).toFixed(3).toLocaleString()}</Text>;
   }
 
   let icon = 'https://pbs.twimg.com/profile_images/626149701189042177/LWpxKEv3.png';
   let title = '';
-  let description = tx.address;
+  let description = utils.friendlyAddress(tx.address);
   if (tx.type === 'service' && tx.service.icon) {
     icon = tx.service.icon;
     title = tx.service.name;
     description = tx.service.description;
   } else {
     title = 'Receive';
+    description = `From ${description}`;
     if (tx.type === 'send') {
       title = 'Send';
+      description = `To ${description}`;
     }
   }
 
