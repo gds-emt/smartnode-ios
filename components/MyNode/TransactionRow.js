@@ -79,8 +79,8 @@ export default function TransactionRow(props) {
     }
   }
 
-  let time = moment(tx.time).fromNow();
-  if (moment(tx.time).isAfter(moment().subtract(1, 'hour'))) {
+  let time = moment.unix(tx.timestamp).fromNow();
+  if (moment.unix(tx.timestamp).isAfter(moment().subtract(1, 'hour'))) {
     time = 'Just now';
   }
 
