@@ -149,7 +149,7 @@ export default class ListScene extends React.Component {
             </View>
           </View>
         </View>
-        <Transactions transactions={this.state.transactions} navigator={this.props.navigator} />
+        <Transactions transactions={this.state.transactions} ethsgd={this.state.ethsgd} navigator={this.props.navigator} />
       </View>
     );
   }

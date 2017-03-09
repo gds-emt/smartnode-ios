@@ -76,6 +76,7 @@ export default class TransactionRow extends React.Component {
       passProps: {
         navigator: this.props.navigator,
         transaction: this.props.transaction,
+        ethsgd: this.props.ethsgd,
         prepped,
       },
     });
@@ -111,7 +112,7 @@ export default class TransactionRow extends React.Component {
     }
 
     return (
-      <TouchableHighlight onPress={() => { this.viewDetail({ icon, title, description, time, txtValue }); }}>
+      <TouchableHighlight onPress={() => { this.viewDetail({ icon, title, description, time }); }}>
         <View style={styles.viewRow}>
           <View style={styles.viewAvatar}>
             <Image style={styles.imgIcon} source={{ uri: icon }} />
