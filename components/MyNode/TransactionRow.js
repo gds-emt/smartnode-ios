@@ -61,15 +61,23 @@ const styles = StyleSheet.create({
 export default class TransactionRow extends React.Component {
   constructor(props) {
     super(props);
+
     this.viewDetail = this.viewDetail.bind(this);
   }
 
-  viewDetail() {
+  viewDetail(prepped) {
     this.props.navigator.push({
       component: Detail,
-      title: this.props.transaction.blockHash,
+      title: '',
+      translucent: false,
+      barTintColor: '#eee',
+      shadowHidden: true,
       navigationBarHidden: false,
-      passProps: this.props,
+      passProps: {
+        navigator: this.props.navigator,
+        transaction: this.props.transaction,
+        prepped,
+      },
     });
   }
 
@@ -103,7 +111,7 @@ export default class TransactionRow extends React.Component {
     }
 
     return (
-      <TouchableHighlight onPress={() => { this.viewDetail(); }}>
+      <TouchableHighlight onPress={() => { this.viewDetail({ icon, title, description, time, txtValue }); }}>
         <View style={styles.viewRow}>
           <View style={styles.viewAvatar}>
             <Image style={styles.imgIcon} source={{ uri: icon }} />
@@ -113,9 +121,7 @@ export default class TransactionRow extends React.Component {
             <Text style={styles.txtTime}>{time}</Text>
             <Text style={styles.txtDescription}>{description}</Text>
           </View>
-          <View style={styles.viewEth}>
-            {txtValue}
-          </View>
+          <View style={styles.viewEth}>{txtValue}</View>
         </View>
       </TouchableHighlight>
     );

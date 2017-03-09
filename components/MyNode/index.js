@@ -11,7 +11,7 @@ export default function MyNode() {
     <NavigatorIOS
       initialRoute={{
         component: ListScene,
-        title: 'My node',
+        title: 'My Node',
         navigationBarHidden: true,
       }}
       style={{ flex: 1 }}
