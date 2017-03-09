@@ -4,6 +4,7 @@ import {
   Image,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -85,19 +86,21 @@ export default function TransactionRow(props) {
   }
 
   return (
-    <View style={styles.viewRow}>
-      <View style={styles.viewAvatar}>
-        <Image style={styles.imgIcon} source={{ uri: icon }} />
+    <TouchableHighlight onPress={() => { console.log('sdf') }}>
+      <View style={styles.viewRow}>
+        <View style={styles.viewAvatar}>
+          <Image style={styles.imgIcon} source={{ uri: icon }} />
+        </View>
+        <View style={styles.viewDetails}>
+          <Text style={styles.txtTitle}>{title}</Text>
+          <Text style={styles.txtTime}>{time}</Text>
+          <Text style={styles.txtDescription}>{description}</Text>
+        </View>
+        <View style={styles.viewEth}>
+          {txtValue}
+        </View>
       </View>
-      <View style={styles.viewDetails}>
-        <Text style={styles.txtTitle}>{title}</Text>
-        <Text style={styles.txtTime}>{time}</Text>
-        <Text style={styles.txtDescription}>{description}</Text>
-      </View>
-      <View style={styles.viewEth}>
-        {txtValue}
-      </View>
-    </View>
+    </TouchableHighlight>
   );
 }
 
