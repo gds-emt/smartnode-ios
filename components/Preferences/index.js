@@ -38,7 +38,7 @@ export default class MyNode extends React.Component {
   getStatus() {
     client.getStatus().then((response) => {
       this.setState({
-        address: response.wallet.address
+        address: response.wallet.address,
       });
     });
   }

@@ -46,7 +46,7 @@ export default class Transactions extends React.Component {
         <ListView
           dataSource={this.state.dsTransactions}
           enableEmptySections
-          renderRow={transaction => <TransactionRow transaction={transaction} />}
+          renderRow={transaction => <TransactionRow transaction={transaction} navigator={this.props.navigator} />}
         />
       </View>
     );
