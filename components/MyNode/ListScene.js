@@ -89,7 +89,7 @@ export default class ListScene extends React.Component {
   componentDidMount() {
     this.getStatus();
     this.getRate();
-    setInterval(this.getStatus, 15 * 1000);
+    setInterval(this.getStatus, 5 * 1000);
     setInterval(this.getRate, 15 * 60 * 1000);
   }
 
