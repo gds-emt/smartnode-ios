@@ -22,9 +22,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
   },
   viewMain: {
-    flex: 2,
+    flex: 2.2,
     backgroundColor: 'white',
   },
   viewEth: {
@@ -51,7 +53,6 @@ const styles = StyleSheet.create({
   txtTime: {
     color: '#999',
     fontSize: 14,
-    marginTop: 2,
   },
   txtValuePositive: {
     color: '#64B710',
@@ -64,12 +65,12 @@ const styles = StyleSheet.create({
   txtValuePositiveSGD: {
     color: '#87B757',
     fontSize: 16,
-    marginTop: 2,
+    marginTop: 0,
   },
   txtValueNegativeSGD: {
     color: '#FD97A6',
     fontSize: 16,
-    marginTop: 2,
+    marginTop: 0,
   },
   txtLink: {
     color: '#1060FF',
