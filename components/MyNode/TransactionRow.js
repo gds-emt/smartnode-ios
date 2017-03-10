@@ -85,9 +85,9 @@ export default class TransactionRow extends React.Component {
   render() {
     const tx = this.props.transaction;
 
-    let txtValue = <Text style={styles.txtValuePositive}>Ξ {utils.fromWei(tx.value).toLocaleString()}</Text>;
+    let txtValue = <Text style={styles.txtValuePositive}>Ξ {utils.fromWei(tx.value, 4).toLocaleString()}</Text>;
     if (Number(tx.value) < 0) {
-      txtValue = <Text style={styles.txtValueNegative}>Ξ {(utils.fromWei(tx.value) * -1).toFixed(3).toLocaleString()}</Text>;
+      txtValue = <Text style={styles.txtValueNegative}>Ξ {(utils.fromWei(tx.value, 4) * -1).toFixed(4).toLocaleString()}</Text>;
     }
 
     let icon = 'https://pbs.twimg.com/profile_images/626149701189042177/LWpxKEv3.png';
