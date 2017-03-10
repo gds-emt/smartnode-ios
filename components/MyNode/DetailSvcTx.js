@@ -54,24 +54,24 @@ const styles = StyleSheet.create({
 
   txtValuePositive: {
     color: '#64B710',
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'right',
   },
   txtValueNegative: {
     color: '#FD405A',
-    fontSize: 14,
+    fontSize: 18,
     textAlign: 'right',
   },
   txtValuePositiveSGD: {
     color: '#87B757',
-    fontSize: 10,
-    marginTop: 2,
+    fontSize: 14,
+    marginTop: 5,
     textAlign: 'right',
   },
   txtValueNegativeSGD: {
     color: '#FD97A6',
-    fontSize: 10,
-    marginTop: 2,
+    fontSize: 14,
+    marginTop: 5,
     textAlign: 'right',
   },
 });
@@ -93,7 +93,7 @@ export default function DetailSvcTx(props) {
       body: (tx.type === 'receive') ? 'Change' : 'Payment',
     },
     {
-      header: 'Ethereum block',
+      header: 'Block',
       body: tx.blockNumber.toLocaleString(),
     },
     {
@@ -101,7 +101,7 @@ export default function DetailSvcTx(props) {
       body: moment.unix(tx.timestamp).format('ddd, MMM D YYYY, H:mm:ss'),
     },
     {
-      header: 'Transaction hash',
+      header: 'Tx hash',
       body: `${tx.transactionHash.substring(0, 20)}…`,
       showAsWithLink: true,
     },

@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  Linking,
   StyleSheet,
   Text,
-  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -22,24 +20,28 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   viewBody: {
-    flex: 1.8,
+    flex: 3.5,
     backgroundColor: 'white',
     padding: 0,
     margin: 0,
   },
   txtHeader: {
-    fontSize: 10,
+    fontSize: 14,
     color: '#999',
-    textAlign: 'left',
+    textAlign: 'right',
+    marginBottom: 1,
+    marginRight: 10,
   },
   txtBody: {
-    fontSize: 10,
+    fontSize: 14,
     color: '#444',
+    marginBottom: 1,
   },
   txtBodyWithLink: {
-    fontSize: 10,
+    fontSize: 14,
     color: '#6498FF',
-  }
+    marginBottom: 1,
+  },
 });
 
 export default function DetailSvcTxLine(props) {

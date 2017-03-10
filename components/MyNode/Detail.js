@@ -55,20 +55,20 @@ const styles = StyleSheet.create({
   },
   txtValuePositive: {
     color: '#64B710',
-    fontSize: 18,
+    fontSize: 28,
   },
   txtValueNegative: {
     color: '#FD405A',
-    fontSize: 18,
+    fontSize: 28,
   },
   txtValuePositiveSGD: {
     color: '#87B757',
-    fontSize: 12,
+    fontSize: 16,
     marginTop: 2,
   },
   txtValueNegativeSGD: {
     color: '#FD97A6',
-    fontSize: 12,
+    fontSize: 16,
     marginTop: 2,
   },
   txtLink: {

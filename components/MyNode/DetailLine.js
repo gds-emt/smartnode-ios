@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   txtBody: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#000',
   },
   txtBodyWithLink: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#1060FF',
   },
 });

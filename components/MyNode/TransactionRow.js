@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   viewEth: {
-    flex: 1.5,
+    flex: 2,
   },
   txtTitle: {
-    fontSize: 16,
+    fontSize: 18,
   },
   txtTime: {
     fontSize: 14,
@@ -36,17 +36,19 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   txtDescription: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#999',
     paddingTop: 2,
   },
   txtValuePositive: {
     textAlign: 'right',
     color: '#87B757',
+    fontSize: 18,
   },
   txtValueNegative: {
     textAlign: 'right',
     color: '#FD677C',
+    fontSize: 18,
   },
   imgIcon: {
     height: 50,
