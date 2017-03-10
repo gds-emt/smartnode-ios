@@ -66,7 +66,11 @@ export default class TransactionRow extends React.Component {
   }
 
   viewDetail(prepped) {
-    this.props.navigator.push({
+    if (this.props.transaction.demo) {
+      return false;
+    }
+
+    return this.props.navigator.push({
       component: Detail,
       title: '',
       translucent: false,
