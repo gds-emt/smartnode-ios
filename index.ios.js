@@ -34,8 +34,8 @@ export default class SmartNode extends React.Component {
           <MyNode />
         </TabBarIOS.Item>
         <TabBarIOS.Item
-          title="Preferences"
-          icon={require('./assets/img/ico_settings.png')}
+          title="Settings"
+          icon={require('./assets/img/ico_gear.png')}
           selected={this.state.currentTab === 'preferences'}
           onPress={() => {
             this.setState({
