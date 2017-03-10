@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   viewBody: {
-    flex: 3.5,
+    flex: 3,
     backgroundColor: 'white',
     padding: 0,
     margin: 0,
@@ -42,6 +42,11 @@ const styles = StyleSheet.create({
     color: '#6498FF',
     marginBottom: 1,
   },
+  txtBodySmall: {
+    fontSize: 12,
+    color: '#444',
+    marginBottom: 1,
+  },
 });
 
 export default function DetailSvcTxLine(props) {
@@ -49,6 +54,8 @@ export default function DetailSvcTxLine(props) {
   let styleTxtBody = styles.txtBody;
   if (line.showAsWithLink) {
     styleTxtBody = styles.txtBodyWithLink;
+  } else if (line.small) {
+    styleTxtBody = styles.txtBodySmall;
   }
 
   return (

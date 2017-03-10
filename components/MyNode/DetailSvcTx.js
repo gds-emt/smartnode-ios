@@ -107,6 +107,14 @@ export default function DetailSvcTx(props) {
     },
   ];
 
+  if (tx.remarks) {
+    lines.push({
+      header: 'Remarks',
+      body: tx.remarks,
+      small: true,
+    });
+  }
+
   return (
     <TouchableHighlight onPress={() => Linking.openURL(`http://kovan.etherscan.io/tx/${tx.transactionHash}`)}>
       <View style={styles.viewDetailSvcTx}>
