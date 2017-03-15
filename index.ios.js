@@ -47,7 +47,7 @@ export default class SmartNode extends React.Component {
             });
           }}
         >
-          <Settings />
+          <Settings SmartNode={this} />
         </TabBarIOS.Item>
       </TabBarIOS>
     );

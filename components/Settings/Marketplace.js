@@ -96,6 +96,10 @@ export default class Marketplace extends React.Component {
   }
 
   procure(vendor, params) {
+    this.props.SmartNode.setState({
+      currentTab: 'node',
+    });
+
     return client.services(vendor, params);
   }
 

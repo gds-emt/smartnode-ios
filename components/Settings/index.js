@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Settings() {
+export default function Settings(props) {
   return (
     <ScrollView style={styles.viewPreferences}>
       <Wallet />
-      <Marketplace />
+      <Marketplace SmartNode={props.SmartNode} />
     </ScrollView>
   );
 }
