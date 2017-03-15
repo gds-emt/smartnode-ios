@@ -104,11 +104,12 @@ export default class TransactionRow extends React.Component {
       title = tx.service.name;
       description = tx.service.description;
     } else {
-      title = 'Receive';
-      description = `From ${description}`;
       if (tx.type === 'send') {
         title = 'Send';
         description = `To ${description}`;
+      } else {
+        title = 'Receive';
+        description = `From ${description}`;
       }
     }
 
