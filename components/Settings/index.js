@@ -1,20 +1,24 @@
 import React from 'react';
 import {
   StyleSheet,
-  View,
+  ScrollView,
 } from 'react-native';
 
 import WalletAddress from './WalletAddress';
+import Marketplace from './Marketplace';
 
 const styles = StyleSheet.create({
   viewPreferences: {
+    flex: 1,
+    backgroundColor: '#fff',
   },
 });
 
 export default function Settings() {
   return (
-    <View style={styles.viewPreferences}>
+    <ScrollView style={styles.viewPreferences}>
       <WalletAddress />
-    </View>
+      <Marketplace />
+    </ScrollView>
   );
 }
