@@ -3,8 +3,11 @@ import {
   Image,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
+
+import client from './../../lib/api-client';
 
 const styles = StyleSheet.create({
   viewMarketplace: {
@@ -87,6 +90,15 @@ const styles = StyleSheet.create({
 });
 
 export default class Marketplace extends React.Component {
+  constructor(props) {
+    super(props);
+    this.procure = this.procure.bind(this);
+  }
+
+  procure(vendor, params) {
+    return client.services(vendor, params);
+  }
+
   render() {
     return (
       <View style={styles.viewMarketplace}>
@@ -106,12 +118,33 @@ export default class Marketplace extends React.Component {
 
           <View style={styles.viewVendorRequests}>
             <Text style={styles.txtRequestsList}>REQUESTS LIST</Text>
-            <View style={styles.viewVendorRequest}>
-              <Text style={styles.txtRequest}>Purchase 5x Cafedirect Explorers Collection Capsules</Text>
-            </View>
-            <View style={styles.viewVendorRequest}>
-              <Text style={styles.txtRequest}>Purchase Double A A4 White Paper (5 Packs)</Text>
-            </View>
+            <TouchableHighlight
+              onPress={() => {
+                this.procure('honestbee', {
+                  value: 2100000000000000000,
+                  description: '5x Cafedirect Explorers Collection Capsules',
+                  params: { order_id: 2 },
+                });
+              }}
+            >
+              <View style={styles.viewVendorRequest}>
+                <Text style={styles.txtRequest}>Purchase 5x Cafedirect Explorers Collection Capsules</Text>
+              </View>
+            </TouchableHighlight>
+
+            <TouchableHighlight
+              onPress={() => {
+                this.procure('honestbee', {
+                  value: 4000000000000000000,
+                  description: 'Double A A4 White Paper (5 Packs)',
+                  params: { order_id: 1 },
+                });
+              }}
+            >
+              <View style={styles.viewVendorRequest}>
+                <Text style={styles.txtRequest}>Purchase Double A A4 White Paper (5 Packs)</Text>
+              </View>
+            </TouchableHighlight>
           </View>
         </View>
       </View>
