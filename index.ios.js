@@ -15,8 +15,7 @@ export default class SmartNode extends React.Component {
     super(props);
 
     this.state = {
-      // currentTab: 'node', // only during dev of settings tab
-      currentTab: 'settings',
+      currentTab: 'node',
     };
   }
 
