@@ -4,7 +4,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-import WalletAddress from './WalletAddress';
+import Wallet from './Wallet';
 import Marketplace from './Marketplace';
 
 const styles = StyleSheet.create({
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 export default function Settings() {
   return (
     <ScrollView style={styles.viewPreferences}>
-      <WalletAddress />
+      <Wallet />
       <Marketplace />
     </ScrollView>
   );

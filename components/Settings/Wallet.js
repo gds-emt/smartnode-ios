@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import client from './../../lib/api-client';
+import utils from './../../lib/utils';
 
 const styles = StyleSheet.create({
   viewWallet: {
@@ -85,7 +86,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   txtFormLabel: {
-    fontSize: 8,
+    fontSize: 9,
+    color: '#777',
+  },
+  txtSendResponse: {
+    fontSize: 12,
+    marginTop: 2,
+    color: '#000',
   },
 
   txtinSendAddress: {
@@ -107,15 +114,21 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class WalletAddress extends React.Component {
+export default class Wallet extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       address: '',
+      sendAddress: '',
+      sendETH: '0',
+      sendResponse: '',
     };
 
+    this.isSending = false;
+
     this.getStatus = this.getStatus.bind(this);
+    this.sendETH = this.sendETH.bind(this);
   }
 
   componentDidMount() {
@@ -135,7 +148,36 @@ export default class WalletAddress extends React.Component {
   }
 
   sendETH() {
-    return Linking.openURL(`http://kovan.etherscan.io/address/${this.state.address}`);
+    if (this.isSending) {
+      return;
+    }
+
+    const amount = utils.toWei(this.state.sendETH).toString();
+    const address = this.state.sendAddress;
+
+    if (amount !== '0' && address !== '') {
+      this.isSending = true;
+      client.send(address, amount).then(() => {
+        this.isSending = false;
+        this.setState({
+          sendAddress: '',
+          sendETH: 0,
+          sendResponse: 'Send request successful.',
+        });
+      }, (err) => {
+        this.isSending = false;
+        this.setState({
+          sendResponse: err,
+        });
+      });
+    } else {
+      this.isSending = false;
+      this.setState({
+        sendResponse: 'Bad address or amount.',
+      });
+    }
+    // return client.send(${
+    // return Linking.openURL(`http://kovan.etherscan.io/address/${this.state.address}`);
   }
 
   render() {
@@ -165,9 +207,22 @@ export default class WalletAddress extends React.Component {
           <View style={styles.viewSendAddress}>
             <View style={styles.viewSendAddressLeft}>
               <Text style={styles.txtFormLabel}>Ethereum address</Text>
-              <TextInput style={styles.txtinSendAddress} />
+              <TextInput
+                style={styles.txtinSendAddress}
+                onChangeText={sendAddress => this.setState({ sendAddress })}
+                autoCorrect={false}
+                autoCapitalize="none"
+                placeholder="Address to send to starting with 0x"
+                value={this.state.sendAddress}
+              />
               <Text style={styles.txtFormLabel}>Amount to send in Ξ</Text>
-              <TextInput keyboardType="numeric" style={styles.txtinAmount} />
+              <TextInput
+                keyboardType="numeric"
+                style={styles.txtinAmount}
+                onChangeText={sendETH => this.setState({ sendETH })}
+                value={this.state.sendETH.toString()}
+              />
+              <Text style={styles.txtSendResponse}>{this.state.sendResponse}</Text>
             </View>
             <View style={styles.viewSendAddressRight}>
               <TouchableHighlight onPress={() => { this.sendETH(); }}>
